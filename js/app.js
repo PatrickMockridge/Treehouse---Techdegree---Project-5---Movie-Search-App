@@ -1,6 +1,7 @@
 'use strict'
 $(document).ready(function () {
   $('.search-button').click(function() {
+$('.movie-list').empty();
 var searchYear = $('#year').val();
 var searchTitle = $('#search').val();
 var omdbOptions = {
