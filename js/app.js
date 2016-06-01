@@ -54,7 +54,8 @@ function displayMovies (data) {
     if (totalResults > 10) {
       $('#pagination').bootpag({
         total: totalResults,
-        maxVisible: 5
+        maxVisible: 5,
+        page: 1
         }).on('page', function(event, num){
         event.preventDefault();
         searchFunction(num);
@@ -74,6 +75,8 @@ function displayMovies (data) {
   $('.poster-wrap').click( function() {
       console.log('click');
       event.preventDefault();
+      $("#year").prop('disabled', true);
+      $("#search").prop('disabled', true);
       //get movie title & movie year from li element clicked
       var clickID = $(this).parent().attr('id')
       var omdbOptionsClick = {
@@ -92,6 +95,8 @@ function displayMovies (data) {
         $('.back-button').on('click', function() {
           event.preventDefault();
           $('.desc-total').empty();
+          $("#year").prop('disabled', false);
+          $("#search").prop('disabled', false);
           searchFunction(1);
         });
       };
