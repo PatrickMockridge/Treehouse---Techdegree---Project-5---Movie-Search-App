@@ -38,9 +38,9 @@ function displayMovies (data) {
   var movieHTML = "";
   if (data.Response == "True") {
   $.each(data.Search, function(i, movie) {
-    movieHTML += "<li><div class='poster-wrap'>";
+    movieHTML += "<li id='" + movie.imdbID + "'><div class='poster-wrap'>";
     if (movie.Poster != "N/A") {
-      movieHTML += "<a href= http://www.imdb.com/title/" + movie.imdbID + " class='movie-poster'><img src=" + movie.Poster + "></a>";
+      movieHTML += "<a href = '#' class='movie-poster'><img src=" + movie.Poster + "></a>";
       }
     else if (movie.Poster == "N/A") {
       movieHTML += "<i class='material-icons poster-placeholder'>crop_original</i>";
@@ -71,6 +71,32 @@ function displayMovies (data) {
     }
   }
   $('#movies').html(movieHTML);
+  $('.poster-wrap').click( function() {
+      console.log('click');
+      event.preventDefault();
+      //get movie title & movie year from li element clicked
+      var clickID = $(this).parent().attr('id')
+      var omdbOptionsClick = {
+        i: clickID
+      }
+      console.log(omdbOptionsClick)
+      //create callback function
+      var displayDescription = function(data) {
+        console.log(data);
+        //removes movie search content
+        $('#movies').empty();
+        $('#pagination').empty();
+        //adds the movie description content
+        $('.main-content').after('<div class="desc-total"><div class="desc-banner"><a href="#" class="back-button"><i class="material-icons back-icon">keyboard_arrow_left</i> Search Results</a><div class="desc-container"><img src="' + data.Poster + '"><div class="desc-title">' + data.Title + ' (' + data.Year + ')</div><span class="imbd-rating">IMBD rating: ' + data.imdbRating + '</span></div></div><div class="plot"><span class="plot-title">Plot Synopsis:</span>' + data.Plot + '<a href="http://www.imdb.com/title/' + data.imdbID + '" class="imbd-link">View on IMBD</a></div></div>');
+        //restart the search when the back button is clicked
+        $('.back-button').on('click', function() {
+          event.preventDefault();
+          $('.desc-total').empty();
+          searchFunction(1);
+        });
+      };
+      $.getJSON(omdbAPI, omdbOptionsClick, displayDescription);
+    });
 }
 $.getJSON(omdbAPI, omdbOptions, displayMovies);
 //end of search function
