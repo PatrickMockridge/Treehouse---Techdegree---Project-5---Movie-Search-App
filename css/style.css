@@ -223,11 +223,15 @@ button {
 
 .plot {
   position: absolute;
+  left: 40%;
   right: 50px;
   max-width: 800px;
   padding: 10px;
-  padding-bottom: 30px;
+  padding-bottom: 100px;
+  padding-left: 10px;
   margin-bottom: 100px;
+  background-color: #f6f7f7;
+  border-radius: 3px;
 }
 
 .plot-title {
@@ -239,8 +243,8 @@ button {
 .imbd-link {
   position: absolute;
   top: 80%;
-  left: 3px;
-  padding: 7px;
+  left: 10px;
+  padding: 7px 7px 7px 7px;
   background-color: #0086b3;
   text-decoration: none;
   color: #fff;
