@@ -55,9 +55,8 @@ function displayMovies (data) {
       $('#pagination').bootpag({
         total: totalResults,
         maxVisible: 5,
-        page: 1
         }).on('page', function(event, num){
-        event.preventDefault();
+        //event.preventDefault();
         searchFunction(num);
       });
       }

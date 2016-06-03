@@ -193,9 +193,9 @@ button {
 
 .desc-total img {
   position: fixed;
-  top: 230px;
+  top: 210px;
   width: 300px;
-  margin: 0 30px 40px 70px;
+  margin: 0 30px 40px 100px;
   border: 8px solid #fff;
 }
 
